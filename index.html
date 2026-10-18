@@ -1,0 +1,112 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Royal Bites | Restaurant</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:#101410;color:#fff}
+header{padding:20px 7%;display:flex;justify-content:space-between;align-items:center;background:#171d17;border-bottom:1px solid #bd9a50}
+.logo{font-size:24px;font-weight:bold;color:#e8c879}
+header a{color:white;text-decoration:none}
+.hero{padding:75px 7%;text-align:center;background:linear-gradient(135deg,#273629,#111711)}
+.hero small{color:#e8c879;letter-spacing:3px}
+.hero h1{font-size:clamp(36px,7vw,65px);margin:20px 0}
+.hero p{color:#d2d5ce;line-height:1.7}
+.btn{display:inline-block;padding:13px 22px;background:#d6b35f;color:#171717;text-decoration:none;border-radius:6px;font-weight:bold;margin-top:15px;border:0;cursor:pointer}
+section{padding:38px 7%}
+.heading{text-align:center;color:#e8c879}
+.menu{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:18px;margin-top:25px}
+.card{background:#1c241d;border:1px solid #343e32;border-radius:12px;overflow:hidden}
+.foodpic{height:145px;display:grid;place-items:center;background:#2b352a;font-size:60px}
+.details{padding:18px}
+.details p{color:#c2c8bd}
+.price{color:#e8c879;font-size:20px;font-weight:bold}
+.details button{width:100%}
+.about{text-align:center;background:#192119;line-height:1.8;color:#d6dbd2}
+.contact{text-align:center}
+footer{text-align:center;padding:22px;color:#aeb6aa;border-top:1px solid #343e32}
+</style>
+</head>
+<body>
+<header>
+<div class="logo">ROYAL BITES</div>
+<a href="#menu">Our Menu ?</a>
+</header>
+
+<div class="hero">
+<small>WELCOME TO ROYAL BITES</small>
+<h1>Good Food. Great Moments.</h1>
+<p>Fresh flavours, delicious meals and warm hospitality.<br>
+Your next favourite meal is waiting for you.</p>
+<a class="btn" href="#menu">Explore Menu</a>
+</div>
+
+<section id="menu">
+<h2 class="heading">Our Popular Menu</h2>
+<div class="menu" id="products"></div>
+</section>
+
+<section class="about">
+<h2 class="heading">Made With Love</h2>
+<p>We believe every meal should be special.<br>
+Visit us for delicious food and memorable moments.</p>
+</section>
+
+<section class="contact">
+<h2 class="heading">Ready to Order?</h2>
+<p>Choose your favourite items and send your order on WhatsApp.</p>
+<button class="btn" onclick="checkout()">Order on WhatsApp</button>
+</section>
+
+<footer>
+© 2026 Royal Bites | Restaurant Website
+<br><small>Website concept by Satyam Yadav Digital Studio</small>
+</footer>
+
+<script>
+// Sample menu for portfolio display. Replace with the restaurant's real menu.
+const menu=[
+ {name:"Classic Burger",price:99,emoji:"??"},
+ {name:"Cheese Pizza",price:199,emoji:"??"},
+ {name:"French Fries",price:89,emoji:"??"},
+ {name:"Paneer Roll",price:129,emoji:"??"},
+ {name:"Cold Coffee",price:99,emoji:"??"},
+ {name:"Chocolate Dessert",price:119,emoji:"??"}
+];
+const cart=[];
+document.getElementById("products").innerHTML=menu.map((p,i)=>`
+<div class="card">
+<div class="foodpic">${p.emoji}</div>
+<div class="details">
+<h3>${p.name}</h3>
+<p>Freshly prepared and full of flavour.</p>
+<div class="price">?${p.price}</div>
+<button class="btn" onclick="add(${i})">Add to Order</button>
+</div>
+</div>`).join("");
+
+function add(i){
+ cart.push(menu[i]);
+ alert(menu[i].name+" added to your order!");
+}
+function checkout(){
+ if(!cart.length){
+  alert("Please add a menu item first.");
+  return;
+ }
+ const number="91XXXXXXXXXX";
+ if(!/^91\d{10}$/.test(number)){
+  alert("This is a sample website. Add the restaurant's authorised WhatsApp number in the code before taking real orders.");
+  return;
+ }
+ const total=cart.reduce((sum,p)=>sum+p.price,0);
+ const items=cart.map(p=>p.name+" - Rs "+p.price).join("\n");
+ const msg="Hello! I would like to order:\n"+items+"\nTotal: Rs "+total;
+ window.open("https://wa.me/"+number+"?text="+encodeURIComponent(msg),"_blank");
+}
+</script>
+</body>
+</html>
